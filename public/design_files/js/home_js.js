@@ -39,15 +39,37 @@ function sendData() {
     var set = document.getElementById("set_field").value;
     var rep = document.getElementById("rep_field").value;
 
+    var date = new Date();
+    var stamp = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + " @ " + date.getHours() + ":" + date.getMinutes();
+
     if (type == "" || set == "" || rep == "") {
         window.alert("Not all of the logs are filled out! Please fill them out!");
     }
     else {
-        database.ref('users/' + name).set({
+        database.ref('users/' + name + "/" + stamp).set({
             type_of_exercise: type,
             num_of_sets: set,
             num_of_reps: rep
-        })
+        });
+        /*var usersRef = database.child("users");
+
+        usersRef.push('users/' + name).set({
+            type_of_exercise: type,
+            num_of_sets: set,
+            num_of_reps: rep
+        });*/
     }
+}
+
+function readData() {
+    firebase.database().ref('/users/' + name).once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            document.getElementById("exercise_label").innerHTML = (childSnapshot.val().type_of_exercise);
+            document.getElementById("set_label").innerHTML = (childSnapshot.val().num_of_sets);
+            document.getElementById("rep_label").innerHTML = (childSnapshot.val().num_of_reps);
+        });
+    });
+
+
 }
 
