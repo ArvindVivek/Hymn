@@ -7,10 +7,16 @@ var firebaseConfig = {
     messagingSenderId: "817369168992",
     appId: "1:817369168992:web:804654ce3e747cdf7ed705",
     measurementId: "G-V62EZTESV5"
+<<<<<<< Updated upstream
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+=======
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+>>>>>>> Stashed changes
 
 const auth = firebase.auth();
 const database = firebase.database();
