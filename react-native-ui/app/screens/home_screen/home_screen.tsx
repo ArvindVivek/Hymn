@@ -15,29 +15,23 @@ import {
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
 import { LinearGradient } from "expo-linear-gradient";
-import FlareComponent from "flare-react";
-import waves from "./waves.flr";
+import { WaveBackground } from "./../../components/WaveBackground"
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
+const name = "twoad";
+
 export class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <LinearGradient
-          colors={["#21c5f2", "#0058ab"]}
-          style={styles.background}
-        >
-          <FlareComponent
-            width={deviceWidth}
-            height={deviceHeight * 1.5}
-            animationName="main"
-            transparent={true}
-            file={waves}
-          />
-        </LinearGradient>
-      </View>
+      <WaveBackground>
+        <Layout>
+          <Text category="h1">
+            {"Welcome, " + name + "!"}
+          </Text>
+        </Layout>
+      </WaveBackground>
     );
   }
 }
