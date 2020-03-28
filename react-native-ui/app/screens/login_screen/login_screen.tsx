@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Text } from "react-native";
+import { StyleSheet, View, Dimensions, Text, AsyncStorage } from "react-native";
 import { createAppContainer, SafeAreaView } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import {
@@ -17,19 +17,28 @@ import {
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
 import { WaveBackground } from "./../../components/WaveBackground";
+import * as firebase from "firebase";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
+let user;
+let username = "";
+export { user, username };
+
+export async function fetchUsername() {
+    username = await AsyncStorage.getItem("name");
+}
+
 export class LoginScreen extends React.Component {
-  signUp(email: string, password: string) {
-    if(email == null || email.length == 0) {
-        alert("please enter your email");
-        return;
+  async signUp(email: string, password: string) {
+    if (email == null || email.length == 0) {
+      alert("please enter your email");
+      return;
     }
-    if(password == null || password.length == 0) {
-        alert("please enter your password");
-        return;
+    if (password == null || password.length == 0) {
+      alert("please enter your password");
+      return;
     }
     const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     email = email.toLowerCase();
@@ -41,7 +50,45 @@ export class LoginScreen extends React.Component {
       alert("password must be at least 6 characters");
       return;
     }
-    this.props.navigation.navigate("HomeScreen")
+
+    let signupOutput = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(e => alert(e.message));
+    console.log(signupOutput);
+    if(signupOutput) {
+        username = email.substring(0, email.indexOf("@"));
+        user = signupOutput;
+        this.props.navigation.navigate("HomeScreen");
+    }
+
+    await this.saveCookies();
+  }
+
+  async login(email: string, password: string) {
+    if (email == null || email.length == 0) {
+      alert("please enter your email");
+      return;
+    }
+    if (password == null || password.length == 0) {
+      alert("please enter your password");
+      return;
+    }
+    email = email.toLowerCase();
+
+    let loginOutput = await firebase.auth().signInWithEmailAndPassword(email, password).catch(e => alert(e.message));
+    console.log(loginOutput);
+    if(loginOutput) {
+        username = email.substring(0, email.indexOf("@"));
+        user = loginOutput;
+        this.props.navigation.navigate("HomeScreen");
+    }
+
+    await this.saveCookies();
+  }
+
+  async saveCookies() {
+    if(this.state.checked == true) {
+        await AsyncStorage.setItem("credentials", JSON.stringify(user));
+        await AsyncStorage.setItem("name", username);
+    }
   }
 
   state = {
@@ -99,7 +146,7 @@ export class LoginScreen extends React.Component {
 
           <View style={styles.rowContainer}>
             <Button
-              onPress={() => this.props.navigation.navigate("HomeScreen")}
+              onPress={() => this.login(this.state.email, this.state.password)}
             >
               Login
             </Button>

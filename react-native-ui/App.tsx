@@ -21,6 +21,7 @@ import * as firebase from 'firebase';
 
 import { HomeScreen } from "./app/screens/home_screen/home_screen";
 import { LoginScreen } from "./app/screens/login_screen/login_screen";
+import { LoadingCheck } from "./app/screens/loading_check/loading_check"
 
 var theme = { ...lightTheme, ...appTheme };
 
@@ -88,6 +89,12 @@ export default class App extends React.Component {
 }
 
 export const StackNavigator = createStackNavigator({
+  LoadingCheck: {
+    screen: LoadingCheck,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
   LoginScreen: {
     screen: LoginScreen,
     navigationOptions: {
