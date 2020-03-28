@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
@@ -11,6 +13,7 @@
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
 
     <title>Home</title>
@@ -18,9 +21,22 @@
 
 <body>
     <button onclick = "signout()">Logout</button>
-    <h1>Home!</h1>
+    <h1 id = "welcome_tag">Welcome Name!</h1>
 
-    <script src = "./design_files/js/home_js.js"></script>
+    <div class = "logger">
+        <label>Exercise: </label>
+        <input id = "exercise_field" placeholder = "Exercise type">
+
+        <label>Sets: </label>
+        <input id = "set_field" placeholder = "# of Sets">
+
+        <label>Reps: </label>
+        <input id = "rep_field" placeholder = "# of Reps">
+
+        <button onclick = "sendData()">Log Exercise</button>
+    </div>
+
+    <script src = "../design_files/js/home_js.js"></script>
 </body>
 
 </html>

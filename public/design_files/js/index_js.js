@@ -19,6 +19,7 @@ function signup() {
 }
 
 function login() {
+    console.log("login being called");
     var user = document.getElementById('user_field').value;
     var password = document.getElementById('password_field').value;
 
@@ -31,6 +32,11 @@ function login() {
     }
 }
 
+function logout() {
+    console.log("logout being called");
+    auth.signOut();
+}
+
 
 auth.onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
@@ -39,6 +45,5 @@ auth.onAuthStateChanged(firebaseUser => {
     }
     else {
         console.log("logout");
-        //window.location = "./index.html";
     }
 });

@@ -7,22 +7,47 @@ var firebaseConfig = {
     messagingSenderId: "817369168992",
     appId: "1:817369168992:web:804654ce3e747cdf7ed705",
     measurementId: "G-V62EZTESV5"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
-  const auth = firebase.auth();
+const auth = firebase.auth();
+const database = firebase.database();
 
-  function signout() {
-      auth.signOut();
-  }
+var name = "";
 
-  auth.onAuthStateChanged(firebaseUser => {
-      if(firebaseUser) {
+auth.onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        console.log("signed in");
+        name = String(firebaseUser.email).substring(0, String(firebaseUser.email).indexOf("@"));
+        document.getElementById("welcome_tag").innerHTML = "Welcome " + name + " ";
+    }
+    else {
+        console.log("sign out successful");
+        window.location = "../index.html";
+    }
+});
 
-      }
-      else {
-          window.location = "./index.html";
-      }
-  });
+function signout() {
+    console.log("signout being called");
+    auth.signOut();
+}
+
+function sendData() {
+    var type = document.getElementById("exercise_field").value;
+    var set = document.getElementById("set_field").value;
+    var rep = document.getElementById("rep_field").value;
+
+    if (type == "" || set == "" || rep == "") {
+        window.alert("Not all of the logs are filled out! Please fill them out!");
+    }
+    else {
+        database.ref('users/' + name).set({
+            type_of_exercise: type,
+            num_of_sets: set,
+            num_of_reps: rep
+        })
+    }
+}
+
