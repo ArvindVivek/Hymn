@@ -40,7 +40,7 @@ function sendData() {
     var rep = document.getElementById("rep_field").value;
 
     var date = new Date();
-    var stamp = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + " @ " + date.getHours() + ":" + date.getMinutes();
+    var stamp = (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getFullYear() + " @ " + date.getHours() + ":" + date.getMinutes();
 
     if (type == "" || set == "" || rep == "") {
         window.alert("Not all of the logs are filled out! Please fill them out!");
@@ -64,6 +64,15 @@ function readData() {
             document.getElementById("rep_label_"+ String(count)).innerHTML = (childSnapshot.val().num_of_reps);
             count += 1;
         });
+    });
+
+    firebase.database().ref('/users/' + name + "/Preferences").once('value').then(function(snapshot) {
+        document.getElementById('first').innerHTML = snapshot.val().first_area.exercise_one + ": " + snapshot.val().first_area.intensity_one;
+        document.getElementById('second').innerHTML = snapshot.val().second_area.exercise_two + ": " + snapshot.val().second_area.intensity_two;
+        document.getElementById('third').innerHTML = snapshot.val().third_area.exercise_three + ": " + snapshot.val().third_area.intensity_three;
+        document.getElementById('fourth').innerHTML = snapshot.val().fourth_area.exercise_four + ": " + snapshot.val().fourth_area.intensity_four;
+        document.getElementById('fifth').innerHTML = snapshot.val().fifth_area.exercise_five + ": " + snapshot.val().fifth_area.intensity_five;
+       
     });
 }
 
