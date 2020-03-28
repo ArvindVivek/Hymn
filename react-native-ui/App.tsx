@@ -92,19 +92,22 @@ export const StackNavigator = createStackNavigator({
   LoadingCheck: {
     screen: LoadingCheck,
     navigationOptions: {
-      headerShown: false
+      headerShown: false,
+      gestureEnabled: false
     }
   },
   LoginScreen: {
     screen: LoginScreen,
     navigationOptions: {
-      headerShown: false
+      headerShown: false,
+      gestureEnabled: false
     }
   },
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: {
-      headerShown: false
+      headerShown: false,
+      gestureEnabled: false
     }
   }
 });
