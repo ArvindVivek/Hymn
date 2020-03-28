@@ -14,6 +14,10 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
 
+  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+
+  <link href="./design_files/css/index_style.css" rel="stylesheet">
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -35,10 +39,13 @@
 
   <h1>Welcome to the Quarantine Home Gym</h1>
 
-  <h4>Our goal</h4>
-  <p>As gyms around the nation close due to quarantine and people stay indoors, we aim to help our users combat a
-    sedentary lifestyle and social isolation by aiding them in home workouts via our exercise assistant and connecting
-    them with like-minded peers through our online chat.</p>
+  <div class="descrip">
+    <h4>Our goal</h4>
+    <p>As gyms around the nation close due to quarantine and people stay indoors, we aim to help our users combat a
+      sedentary lifestyle and social isolation by aiding them in home workouts via our exercise assistant and connecting
+      them with like-minded peers through our online chat.</p>
+
+  </div>
 
   <div class="login_fields">
     <p>Username: </p>
@@ -46,10 +53,11 @@
 
     <p>Password:</p>
     <input id="password_field" type="password" placeholder="Password">
+  </div>
 
-    <button onclick="signup()">Sign Up</button>
-    <button onclick="login()">Login</button>
-    <!--<button onclick="sendMessage()">Send Message</button> -->
+  <div class="login_buttons">
+    <button id = "signup" onclick="signup()">Sign Up</button>
+    <button id = login" onclick="login()">Login</button>
   </div>
 
 
