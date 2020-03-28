@@ -15,6 +15,18 @@
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
     <title>Home</title>
 </head>
@@ -40,15 +52,55 @@
         <button onclick="sendData()">Log Exercise</button>
     </div>
 
-    <div class = "cards_carousel">
-        <ul id = "exercise_label"></ul>
-        <ul id = "set_label"></ul>
-        <ul id = "rep_label"></ul>
-    </div>
+</br>
+
+    <div id = "demo" class = "carousel slide" data-ride = "carousel">
+        <div class="carousel-indicators">
+            <li data-target = "#demo" data-slide-to = "0" class = "active"></li>
+            <li data-target = "#demo" data-slide-to="1"></li>
+            <li data-target = "#demo" data-slide-to="2"></li>
+        </div>
     
+        <div class = "carousel-inner">
+            <div class = "carousel-item active">
+                <ul>
+                    <li id = "exercise_label_1"></li>
+                    <li id = "set_label_1"></li>
+                    <li id = "rep_label_1"></li>
+                </ul>
+            </div>
+            <div class = "carousel-item">
+                <ul>
+                    <li id = "exercise_label_2"></li>
+                    <li id = "set_label_2"></li>
+                    <li id = "rep_label_2"></li>
+                </ul>
+            </div>
+
+            <div class = "carousel-item">
+                <ul>
+                    <li id = "exercise_label_3"></li>
+                    <li id = "set_label_3"></li>
+                    <li id = "rep_label_3"></li>
+                </ul>
+            </div>
+
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div>
+    
+        </div>
+    </div>
+
+    <p id = "exercise_Field"></p>
+
     <button>Chat</button>
 
-    <button onclick = "readData()">Exercise Plans</button>
+    <button onclick="readData()">Exercise Plans</button>
 
     <script src="../design_files/js/home_js.js"></script>
 </body>

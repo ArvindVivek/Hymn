@@ -62,14 +62,15 @@ function sendData() {
 }
 
 function readData() {
+    var count = 1;
+
     firebase.database().ref('/users/' + name).once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            document.getElementById("exercise_label").innerHTML = (childSnapshot.val().type_of_exercise);
-            document.getElementById("set_label").innerHTML = (childSnapshot.val().num_of_sets);
-            document.getElementById("rep_label").innerHTML = (childSnapshot.val().num_of_reps);
+            document.getElementById("exercise_label_" + String(count)).innerHTML = (childSnapshot.val().type_of_exercise);
+            document.getElementById("set_label_"+ String(count)).innerHTML = (childSnapshot.val().num_of_sets);
+            document.getElementById("rep_label_"+ String(count)).innerHTML = (childSnapshot.val().num_of_reps);
+            count += 1;
         });
     });
-
-
 }
 
