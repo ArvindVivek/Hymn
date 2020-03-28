@@ -20,18 +20,19 @@ import * as Font from "expo-font";
 import * as firebase from 'firebase';
 
 import { HomeScreen } from "./app/screens/home_screen/home_screen";
+import { LoginScreen } from "./app/screens/login_screen/login_screen";
 
 var theme = { ...lightTheme, ...appTheme };
 
-var firebaseConfig = {
-  apiKey: "AIzaSyCNoFTtU6ptY4xMA33oRdPqOnE3RMTO3hg",
-  authDomain: "patriotapp-49caf.firebaseapp.com",
-  databaseURL: "https://patriotapp-49caf.firebaseio.com",
-  projectId: "patriotapp-49caf",
-  storageBucket: "patriotapp-49caf.appspot.com",
-  messagingSenderId: "86407120548",
-  appId: "1:86407120548:web:a786d71211e74d55150831",
-  measurementId: "G-N0LH0BYTTN"
+const firebaseConfig = {
+  apiKey: "AIzaSyBkGmqg0xyAPT7yuru-SdBpMXucpeUIwEI",
+  authDomain: "lahacks2020-aedfb.firebaseapp.com",
+  databaseURL: "https://lahacks2020-aedfb.firebaseio.com",
+  projectId: "lahacks2020-aedfb",
+  storageBucket: "lahacks2020-aedfb.appspot.com",
+  messagingSenderId: "817369168992",
+  appId: "1:817369168992:web:804654ce3e747cdf7ed705",
+  measurementId: "G-V62EZTESV5"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -87,6 +88,12 @@ export default class App extends React.Component {
 }
 
 export const StackNavigator = createStackNavigator({
+  LoginScreen: {
+    screen: LoginScreen,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: {
