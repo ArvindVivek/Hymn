@@ -1,9 +1,14 @@
-var legs = 5;
-var push = 0;
-var pull = 2;
-var cardio = 1;
 var intensity = 1;
-var muscles = [["Legs", legs, 1], ["Push", push, 1], ["Pull", pull, 1], ["Cardio", cardio, 1]];
+var muscles = [ ["Chest", 2, 1, recChest()], 
+                ["Shoulder", 0, 1, recShoulder()], 
+                ["Back", 1, 1, recBack()], 
+                ["Triceps", 1, 1, recTriceps()],
+                ["Biceps", 1, 1, recBiceps()],
+                ["Quadriceps", 2, 1, recQuadriceps()],
+                ["Hamstrings", 2, 1, recHamstrings()],
+                ["Calf", 2, 1, recCalf()]
+                ];
+                //name, days done, intensity level
 
 function identifyAreas() {
     var least = 0;
@@ -12,47 +17,63 @@ function identifyAreas() {
             least = i;
         }
     }
-    return muscles[least][0];
+    return muscles[least];
 }
 
 function main() {
     if (needRest()) {
         document.getElementById("test").innerHTML = "Rest";
     }
-    else if (identifyAreas() == muscles[0][0]) {
-        document.getElementById("test").innerHTML = recLegs();
+    else {
+        for (var i = 0; i < muscles.length; i++) {
+            if (identifyAreas() == muscles[i]) {
+                document.getElementById("test").innerHTML = muscles[i][3];
+            }
+        }
     }
-    else if (identifyAreas() == muscles[1][0]) {
-        document.getElementById("test").innerHTML = recPush() + "<br>" + recPull();
-    }
-    else if (identifyAreas() == muscles[2][0]) {
-        document.getElementById("test").innerHTML = recPull();
-    }
-    else if (identifyAreas() == muscles[3][0]) {
-        document.getElementById("test").innerHTML = recCardio();
-    }
+
+    //else if (identifyAreas() == muscles[3][0]) {
+        //document.getElementById("test").innerHTML = recCardio();
+    //}
 }
 
-function recPush() {
-    var ex = "Pushups - " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
-    if (intensity > 1) {
-        ex += " We'd also recommend trying handstand/dive bomber pushups."
-    }   
+function recChest() {
+    var ex = "Insert Chest Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
     return ex.link("https://www.google.com");
 }
 
-function recPull() {
-    var ex = "Insert Pull Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+function recShoulder() {
+    var ex = "Insert Shoulder Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
     return ex;
 }
 
-function recCardio() {
-    var ex = "Insert Cardio Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+function recBack() {
+    var ex = "Insert Back Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
     return ex;
 }
 
-function recLegs() {
-    var ex = "Insert Legs Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+function recTriceps() {
+    var ex = "Insert Triceps Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+    return ex;
+}
+
+function recBiceps() {
+    var ex = "Insert Biceps Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+    return ex;
+}
+
+function recQuadriceps() {
+    var ex = "Insert Quadriceps Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+    return ex;
+}
+
+function recHamstrings() {
+    var ex = "Insert Hamstrings Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
+    return ex;
+}
+
+function recCalf() {
+    var ex = "Insert Calf Exercise: " + "# of Sets: " + String(Math.round(2*intensity)) + " # of Reps: " + String(10);
     return ex;
 }
 
