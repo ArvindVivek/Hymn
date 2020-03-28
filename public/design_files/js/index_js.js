@@ -15,7 +15,7 @@ firebase.analytics();
 const auth = firebase.auth();
 
 function signup() {
-    window.location = "./signup.html";
+    window.location = "./templates/signup.html";
 }
 
 function login() {
@@ -34,9 +34,11 @@ function login() {
 
 auth.onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-
+        console.log("success login");
+        window.location = "./templates/home.html";
     }
     else {
+        console.log("logout");
         //window.location = "./index.html";
     }
 });
