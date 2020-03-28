@@ -7,18 +7,23 @@ var firebaseConfig = {
     messagingSenderId: "817369168992",
     appId: "1:817369168992:web:804654ce3e747cdf7ed705",
     measurementId: "G-V62EZTESV5"
-<<<<<<< Updated upstream
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-=======
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
->>>>>>> Stashed changes
 
 const auth = firebase.auth();
+const database = firebase.database();
+
+var name = "";
+
+auth.onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        window.location = "./home.html";
+    }
+    else {
+    }
+});
 
 function signup() {
     var user = document.getElementById("user_field").value;
@@ -31,16 +36,37 @@ function signup() {
         const promise = auth.createUserWithEmailAndPassword(user, password);
         promise.catch(e => alert(e.message));
 
-        /*const signInPromise = auth.signInWithEmailAndPassword(user, password);
-        signInPromise.catch(e => alert(e.message));*/
+        
     }
 }
 
-auth.onAuthStateChanged(firebaseUser => {
-    if (firebaseUser) {
-        window.location = "./home.html";
-    }
-    else {
-        //window.location = "./signup.html";
-    }
-});
+function data() {
+    name = String(document.getElementById("user_field").value).substring(0, String(document.getElementById("user_field").value).indexOf("@"));
+
+    var exercise_one = document.getElementById("area_1").value;
+    var intensity_one = document.getElementById("level_1").value;
+
+    var exercise_two = document.getElementById("area_2").value;
+    var intensity_two = document.getElementById("level_2").value;
+
+    var exercise_three = document.getElementById("area_3").value;
+    var intensity_three = document.getElementById("level_3").value;
+
+    var exercise_four = document.getElementById("area_4").value;
+    var intensity_four = document.getElementById("level_4").value;
+
+    var exercise_five = document.getElementById("area_5").value;
+    var intensity_five = document.getElementById("level_5").value;
+
+    database.ref('users/' + name + "/Preferences").set({
+        first_area: {exercise_one, intensity_one},
+        second_area: {exercise_two, intensity_two},
+        third_area: {exercise_three, intensity_three},
+        fourth_area: {exercise_four, intensity_four},
+        fifth_area: {exercise_five, intensity_five}
+    });
+
+    
+
+}
+

@@ -51,13 +51,6 @@ function sendData() {
             num_of_sets: set,
             num_of_reps: rep
         });
-        /*var usersRef = database.child("users");
-
-        usersRef.push('users/' + name).set({
-            type_of_exercise: type,
-            num_of_sets: set,
-            num_of_reps: rep
-        });*/
     }
 }
 
