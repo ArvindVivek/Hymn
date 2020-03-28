@@ -16,7 +16,7 @@ import {
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
-import { WaveBackground } from "./../../components/WaveBackground";
+import { WaveBackground } from "../../components/wave_background/wave_background";
 import * as firebase from "firebase";
 
 let deviceHeight = Dimensions.get("window").height;
@@ -54,7 +54,7 @@ export class LoginScreen extends React.Component {
     let signupOutput = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(e => alert(e.message));
     console.log(signupOutput);
     if(signupOutput) {
-        username = email.substring(0, email.indexOf("@"));
+        username = email;
         user = signupOutput;
         this.props.navigation.navigate("HomeScreen");
     }
@@ -76,7 +76,7 @@ export class LoginScreen extends React.Component {
     let loginOutput = await firebase.auth().signInWithEmailAndPassword(email, password).catch(e => alert(e.message));
     console.log(loginOutput);
     if(loginOutput) {
-        username = email.substring(0, email.indexOf("@"));
+        username = email;
         user = loginOutput;
         this.props.navigation.navigate("HomeScreen");
     }

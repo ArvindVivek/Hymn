@@ -13,7 +13,8 @@ import {
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
-import { WaveBackground } from "./../../components/WaveBackground";
+import { WaveBackground } from "../../components/wave_background/wave_background";
+import { QuickLog } from "../../components/quick_log/quick_log";
 
 import { user, username } from "../login_screen/login_screen";
 
@@ -26,9 +27,10 @@ export class HomeScreen extends React.Component {
       <WaveBackground colors={["#21c5f2", "#0058ab"]}>
         <View style={styles.headerBox}>
           <Text style={styles.headerText}>
-            {"Welcome, " + username + "!"}
+            {"Welcome, " + username.substring(0, username.indexOf("@")) + "!"}
           </Text>
         </View>
+        <QuickLog />
       </WaveBackground>
     );
   }
@@ -50,5 +52,14 @@ const styles = StyleSheet.create({
     fontFamily: "Metropolis-Bold",
     fontSize: deviceHeight/20,
     color: "white"
+  },
+  quickBox: {
+    width: deviceWidth,
+    height: deviceHeight/12,
+    backgroundColor: "#FFFFFF70",
+    flexDirection: "row"
+  },
+  contentText: {
+    color: "black",
   }
 });

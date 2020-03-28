@@ -13,7 +13,7 @@ import {
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
-import { WaveBackground } from "./../../components/WaveBackground";
+import { WaveBackground } from "../../components/wave_background/wave_background";
 
 import { user, username, fetchUsername } from "../login_screen/login_screen";
 
