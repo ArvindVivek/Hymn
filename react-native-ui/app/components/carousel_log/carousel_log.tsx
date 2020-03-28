@@ -13,34 +13,23 @@ import {
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
-import { WaveBackground } from "../../components/wave_background/wave_background";
-import { QuickLog } from "../../components/quick_log/quick_log";
+import Carousel from "react-native-snap-carousel";
 
-import { user, username } from "../login_screen/login_screen";
-import { CarouselLog } from "../../components/carousel_log/carousel_log"
+import { user, username } from "../../screens/login_screen/login_screen";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-export class HomeScreen extends React.Component {
+export class CarouselLog extends React.Component {
   render() {
-    return (
-      <WaveBackground colors={["#21c5f2", "#0058ab"]}>
-        <View style={styles.headerBox}>
-          <Text style={styles.headerText}>
-            {"Welcome, " + username.substring(0, username.indexOf("@")) + "!"}
-          </Text>
-        </View>
-        <QuickLog />
-        <CarouselLog />
-      </WaveBackground>
-    );
+    return <View style={styles.container}></View>; //types of exercise: chest, shoulder, back, tricep, bicep, quadriceps, hamstring, calves
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: deviceWidth,
+    height: deviceHeight / 2,
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center"
@@ -52,16 +41,16 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: "Metropolis-Bold",
-    fontSize: deviceHeight/20,
+    fontSize: deviceHeight / 20,
     color: "white"
   },
   quickBox: {
     width: deviceWidth,
-    height: deviceHeight/12,
+    height: deviceHeight / 12,
     backgroundColor: "#FFFFFF70",
     flexDirection: "row"
   },
   contentText: {
-    color: "black",
+    color: "black"
   }
 });
