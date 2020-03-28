@@ -2,32 +2,138 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Signup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signup</title>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
 </head>
 
 <body>
-    <h1>Sign Up Here!</h1>
+  <h1>Sign Up Here!</h1>
 
-    <p>Username: </p>
-    <input id="user_field" placeholder="Email Address">
+  <p>Username: </p>
+  <input id="user_field" placeholder="Email Address">
 
-    <p>Password:</p>
-    <input id="password_field" type="password" placeholder="Password">
+  <p>Password:</p>
+  <input id="password_field" type="password" placeholder="Password">
 
-    <button onclick="signup()">Enter</button>
+  </br>
 
-    <script src="../design_files/js/signup_js.js"></script>
+  <label for="area_1">Choose areas you would like to target and level of intensity.</label>
+
+  <div class="preferences">
+    <div class="preferences-1">
+      <select id="area_1">
+        <option value="chest">Chest</option>
+        <option value="shoulder">Shoulder</option>
+        <option value="back">back</option>
+        <option value="tricep">Tricep</option>
+        <option value="bicep">Bicep</option>
+        <option value="quadriceps">Quadriceps</option>
+        <option value="hamstrings">Hamstring</option>
+        <option value="calf">Calves</option>
+      </select>
+
+      <select id="level_1">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+      </select>
+    </div>
+
+    <div class="preferences-2">
+      <select id="area_2">
+        <option value="chest">Chest</option>
+        <option value="shoulder">Shoulder</option>
+        <option value="back">back</option>
+        <option value="tricep">Tricep</option>
+        <option value="bicep">Bicep</option>
+        <option value="quadriceps">Quadriceps</option>
+        <option value="hamstrings">Hamstring</option>
+        <option value="calf">Calves</option>
+      </select>
+
+      <select id="level_2">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+      </select>
+    </div>
+
+    <div class="preferences-3">
+      <select id="area_3">
+        <option value="chest">Chest</option>
+        <option value="shoulder">Shoulder</option>
+        <option value="back">back</option>
+        <option value="tricep">Tricep</option>
+        <option value="bicep">Bicep</option>
+        <option value="quadriceps">Quadriceps</option>
+        <option value="hamstrings">Hamstring</option>
+        <option value="calf">Calves</option>
+      </select>
+
+      <select id="level_3">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+      </select>
+    </div>
+
+    <div class="preferences-4">
+      <select id="area_4">
+        <option value="chest">Chest</option>
+        <option value="shoulder">Shoulder</option>
+        <option value="back">back</option>
+        <option value="tricep">Tricep</option>
+        <option value="bicep">Bicep</option>
+        <option value="quadriceps">Quadriceps</option>
+        <option value="hamstrings">Hamstring</option>
+        <option value="calf">Calves</option>
+      </select>
+
+      <select id="level_4">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+      </select>
+    </div>
+
+    <div class="preferences-5">
+      <select id="area_5">
+        <option value="chest">Chest</option>
+        <option value="shoulder">Shoulder</option>
+        <option value="back">back</option>
+        <option value="tricep">Tricep</option>
+        <option value="bicep">Bicep</option>
+        <option value="quadriceps">Quadriceps</option>
+        <option value="hamstrings">Hamstring</option>
+        <option value="calf">Calves</option>
+      </select>
+
+      <select id="level_5">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+      </select>
+    </div>
+
+  </div>
+  </br>
+
+  <button onclick="signup()">Enter</button>
+
+  <button onclick="data()">Data</button>
+
+  <script src="../design_files/js/signup_js.js"></script>
 </body>
 
 </html>
