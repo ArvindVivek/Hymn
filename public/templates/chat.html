@@ -1,0 +1,84 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+<script src="design_files/js/chat_js.js"></script>
+<script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBkGmqg0xyAPT7yuru-SdBpMXucpeUIwEI",
+            authDomain: "lahacks2020-aedfb.firebaseapp.com",
+            databaseURL: "https://lahacks2020-aedfb.firebaseio.com/",
+            projectId: "lahacks2020-aedfb",
+            storageBucket: "lahacks2020-aedfb.appspot.com",
+            messagingSenderId: "817369168992",
+            appId: "1:817369168992:web:804654ce3e747cdf7ed705",
+            measurementId: "G-V62EZTESV5"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var myName = prompt("Enter your name: ");
+
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            firebase.database().ref("messages").push().set({
+                "sender": myName,
+                "message": message,
+            });   
+            return false;
+        };
+
+        firebase.database().ref("messages").on("child_added", function (snapshot) {
+            var html = "";
+            html += "<li>";
+            if (snapshot.val().sender == myName) {
+			    html += "<button data-id='" + snapshot.key + "' onclick='deleteMessage(this);'>";
+				html += "Delete";
+			    html += "</button>";
+		    }    
+            html += snapshot.val().sender + ": " + snapshot.val().message;
+            html += "</li>";
+
+            document.getElementById("messages").innerHTML += html;
+        });
+
+        function deleteMessage(self) {
+            // get message ID
+            var messageId = self.getAttribute("data-id");
+
+            // delete message
+            firebase.database().ref("messages").child(messageId).remove();
+        };
+
+        // attach listener for delete message
+        firebase.database().ref("messages").on("child_removed", function (snapshot) {
+            // remove message node
+            document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
+        });
+    </script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Chat</title>
+</head>
+
+<body>
+    
+    <h1>Chat</h1>
+
+    <form onsubmit="return sendMessage();">
+        <input id="message" placeholder="Enter message" autocomplete="off">
+            
+        <input type="submit">
+    </form>
+
+    <ul id="messages"></ul>
+    
+</body>
+
+</html>
