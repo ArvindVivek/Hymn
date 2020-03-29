@@ -63,8 +63,24 @@ async function fetchUserData() {
   console.log(userData);
 }
 
+function selectLevel(item) {
+  let sets = Number.parseInt(item["sets"]);
+  if (sets <= 3) {
+    return "level_1";
+  } else if (sets == 4) {
+    return "level_2";
+  } else {
+    return "level_3";
+  }
+}
+
 function selectImage(item) {
-  return images[item["type"]];
+  // return images[item["type"]];
+  return require("../../../assets/img/exercises/" +
+    selectLevel(item) +
+    "/" +
+    item["type"] +
+    ".png");
 }
 
 function renderHeader(item) {
@@ -74,6 +90,7 @@ function renderHeader(item) {
       source={{
         uri: selectImage(item)
       }}
+      resizeMode="contain"
     />
   );
   return header;
@@ -241,9 +258,9 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     height: deviceHeight / 2 - deviceHeight / 8,
-    width: (2 * deviceWidth) / 3,
+    width: (2 * deviceWidth) / 3
   },
   cardTitle: {
-    fontFamily: 'Metropolis-SemiBold'
+    fontFamily: "Metropolis-SemiBold"
   }
 });
