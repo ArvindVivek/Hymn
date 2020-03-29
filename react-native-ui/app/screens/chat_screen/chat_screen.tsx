@@ -40,7 +40,7 @@ export class ChatScreen extends React.Component<Props> {
 
   render() {
     return (
-      <WaveBackground colors={["#21c5f2", "#0058ab"]} styles={styles.waveContainer}>
+      <WaveBackground colors={["#a002eb", "#3f0093"]} styles={styles.waveContainer}>
         <View style={styles.container}>
           <View style={styles.headerBox}>
             <Text style={styles.headerText}>{"Chat"}</Text>

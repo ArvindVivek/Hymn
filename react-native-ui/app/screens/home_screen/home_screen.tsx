@@ -16,18 +16,17 @@ import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
 import { WaveBackground } from "../../components/wave_background/wave_background";
 import { QuickLog } from "../../components/quick_log/quick_log";
-
 import { user, username } from "../login_screen/login_screen";
-import { CarouselLog, CarouselLogTest } from "../../components/carousel_log/carousel_log"
+import { CarouselLog } from "../../components/carousel_log/carousel_log";
+import { FAB } from "react-native-paper";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
 export class HomeScreen extends React.Component {
   goToChat = () => {
-    // 1.
-    this.props.navigation.navigate('ChatScreen', { name: username });
-  }
+    this.props.navigation.navigate("ChatScreen", { name: username });
+  };
 
   render() {
     return (
@@ -38,16 +37,10 @@ export class HomeScreen extends React.Component {
           </Text>
         </View>
         <QuickLog />
-        <View style={{height: deviceHeight/12}} />
-        <Text style={styles.subText}>
-          Recently logged:
-        </Text>
+        <View style={{ height: deviceHeight / 12 }} />
+        <Text style={styles.subText}>Recently logged:</Text>
         <CarouselLog />
-        <Button
-          onPress={() => this.goToChat()}
-        >
-          Chat
-        </Button>
+        <FAB icon="chat" label="CHAT" style={styles.fab} onPress={() => this.goToChat()}/>
       </WaveBackground>
     );
   }
@@ -67,23 +60,28 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: "Metropolis-Bold",
-    fontSize: deviceHeight/20,
+    fontSize: deviceHeight / 20,
     color: "white"
   },
   quickBox: {
     width: deviceWidth,
-    height: deviceHeight/12,
+    height: deviceHeight / 12,
     backgroundColor: "#FFFFFF70",
     flexDirection: "row"
   },
   contentText: {
-    color: "black",
+    color: "black"
   },
   subText: {
     fontFamily: "Metropolis-SemiBold",
-    fontSize: deviceHeight/40,
+    fontSize: deviceHeight / 40,
     color: "white",
     marginBottom: 12,
     marginLeft: 50
+  },
+  fab: {
+    position: "absolute",
+    bottom: -60,
+    right: 50
   }
 });
