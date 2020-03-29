@@ -294,9 +294,8 @@ export class HomeScreen extends React.Component {
     await wait(500);
     await firebase
       .database()
-      .ref("users/" + scrub(username))
+      .ref("users/" + scrub(username + "/preferences"))
       .set({
-        preferences: {
           chest: preferences["chest"],
           shoulder: preferences["shoulder"],
           back: preferences["back"],
@@ -306,7 +305,6 @@ export class HomeScreen extends React.Component {
           hamstring: preferences["hamstring"],
           calves: preferences["calves"],
           cardio: preferences["cardio"]
-        }
       });
     console.log(preferences);
     console.log(preferences["cardio"]);
