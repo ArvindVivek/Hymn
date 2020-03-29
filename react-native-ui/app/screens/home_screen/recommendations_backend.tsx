@@ -42,7 +42,7 @@ function identifyAreas() {
 }
 
 function recChest() {
-  var intensity = preferences["chest"];
+  var intensity = Number.parseInt(preferences["chest"]);
   var ex =
     "Pushups - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -59,7 +59,7 @@ function recChest() {
 }
 
 function recShoulder() {
-  var intensity = preferences["shoulder"];
+  var intensity = Number.parseInt(preferences["shoulder"]);
   var ex =
     "Plank Tuck Jumps - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -76,7 +76,7 @@ function recShoulder() {
 }
 
 function recBack() {
-  var intensity = preferences["back"];
+  var intensity = Number.parseInt(preferences["back"]);
   var ex =
     "Superman - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -93,7 +93,7 @@ function recBack() {
 }
 
 function recTriceps() {
-  var intensity = preferences["triceps"];
+  var intensity = Number.parseInt(preferences["triceps"]);
   var ex =
     "Knee Cobra Pushups - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -110,7 +110,7 @@ function recTriceps() {
 }
 
 function recBiceps() {
-  var intensity = preferences["bicep"];
+  var intensity = Number.parseInt(preferences["bicep"]);
   var ex =
     "Curls - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -127,7 +127,7 @@ function recBiceps() {
 }
 
 function recQuadriceps() {
-  var intensity = preferences["quadriceps"];
+  var intensity = Number.parseInt(preferences["quadriceps"]);
   var ex =
     "Lunges - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -144,7 +144,7 @@ function recQuadriceps() {
 }
 
 function recHamstrings() {
-  var intensity = preferences["hamstring"];
+  var intensity = Number.parseInt(preferences["hamstring"]);
   var ex =
     "Hip Raises - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -161,7 +161,7 @@ function recHamstrings() {
 }
 
 function recCalf() {
-  var intensity = preferences["calf"];
+  var intensity = Number.parseInt(preferences["calf"]);
   var ex =
     "High Knees - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -178,7 +178,7 @@ function recCalf() {
 }
 
 function recCardio() {
-  var intensity = preferences["cardio"];
+  var intensity = Number.parseInt(preferences["cardio"]);
   var ex =
     "Jumping Jacks - # of Sets: " +
     String(Math.round(2 + intensity)) +
@@ -196,15 +196,15 @@ function recCardio() {
 
 function needRest() {
   var intensity =
-    (preferences["chest"] +
-      preferences["shoulder"] +
-      preferences["back"] +
-      preferences["triceps"] +
-      preferences["bicep"] +
-      preferences["quadriceps"] +
-      preferences["hamstring"] +
-      preferences["calves"] +
-      preferences["cardio"]) /
+    (Number.parseInt(preferences["chest"]) +
+    Number.parseInt(preferences["shoulder"]) +
+    Number.parseInt(preferences["back"]) +
+    Number.parseInt(preferences["triceps"]) +
+    Number.parseInt(preferences["bicep"]) +
+    Number.parseInt(preferences["quadriceps"]) +
+    Number.parseInt(preferences["hamstring"]) +
+    Number.parseInt(preferences["calves"]) +
+    Number.parseInt(preferences["cardio"])) /
     9;
   var sum = 0;
   for (var i = 0; i < muscles.length; i++) {
