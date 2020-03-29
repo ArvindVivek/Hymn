@@ -22,12 +22,12 @@ function identifyAreas() {
 
 function main() {
     if (needRest()) {
-        document.getElementById("test").innerHTML = "Rest";
+        document.getElementById("rec_exercise").innerHTML = "Rest";
     }
     else {
         for (var i = 0; i < muscles.length; i++) {
             if (identifyAreas() == muscles[i]) {
-                document.getElementById("test").innerHTML = muscles[i][3];
+                document.getElementById("rec_exercise").innerHTML = muscles[i][3];
             }
         }
     }
