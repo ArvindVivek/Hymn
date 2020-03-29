@@ -39,6 +39,12 @@ function scrub(str: string) {
   return str;
 }
 
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 async function fetchUserData() {
   let fetchedData;
   await firebase
@@ -49,6 +55,7 @@ async function fetchUserData() {
       fetchedData = snapshot.val();
       console.log(fetchedData);
     });
+  await wait(500);
   userData = new Array();
   for (var i in fetchedData) {
     if (isNaN(i.substring(0, 1))) {
