@@ -22,6 +22,7 @@ import { HomeScreen } from "./app/screens/home_screen/home_screen";
 import { LoginScreen } from "./app/screens/login_screen/login_screen";
 import { LoadingCheck } from "./app/screens/loading_check/loading_check"
 import { ChatScreen } from "./app/screens/chat_screen/chat_screen";
+import { RecommendationScreen } from "./app/screens/recommendation_screen/recommendation_screen";
 
 var theme = { ...lightTheme, ...appTheme };
 
@@ -112,6 +113,12 @@ export const StackNavigator = createStackNavigator({
   },
   ChatScreen: {
     screen: ChatScreen,
+    navigationOptions: {
+      gestureEnabled: false
+    }
+  },
+  RecommendationScreen: {
+    screen: RecommendationScreen,
     navigationOptions: {
       gestureEnabled: false
     }

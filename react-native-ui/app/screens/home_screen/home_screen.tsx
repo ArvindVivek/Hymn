@@ -28,9 +28,13 @@ import { CarouselLog } from "../../components/carousel_log/carousel_log";
 import { FAB } from "react-native-paper";
 import firebase from "firebase";
 import { ScrollView } from "react-native-gesture-handler";
+import { main as Recommendation } from "./recommendations_backend";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
+
+let recommendation = "";
+export {recommendation};
 
 const renderSettingsIcon = style => {
   return (
@@ -52,6 +56,7 @@ function scrub(str: string) {
 }
 
 let preferences;
+export { preferences };
 
 async function fetchPreferences() {
   let fetchedData;
@@ -272,6 +277,10 @@ export class HomeScreen extends React.Component {
     isVisible: false
   };
 
+  async UNSAFE_componentWillMount() {
+    await fetchPreferences();
+  }
+
   setVisible() {
     this.setState({ isVisible: !this.state.isVisible });
   }
@@ -288,19 +297,25 @@ export class HomeScreen extends React.Component {
       .ref("users/" + scrub(username))
       .set({
         preferences: {
-          "chest": preferences["chest"],
-          "shoulder": preferences["shoulder"],
-          "back": preferences["back"],
-          "triceps": preferences["triceps"],
-          "bicep": preferences["bicep"],
-          "quadriceps": preferences["quadriceps"],
-          "hamstring": preferences["hamstring"],
-          "calves": preferences["calves"],
-          "cardio": preferences["cardio"]
+          chest: preferences["chest"],
+          shoulder: preferences["shoulder"],
+          back: preferences["back"],
+          triceps: preferences["triceps"],
+          bicep: preferences["bicep"],
+          quadriceps: preferences["quadriceps"],
+          hamstring: preferences["hamstring"],
+          calves: preferences["calves"],
+          cardio: preferences["cardio"]
         }
       });
     console.log(preferences);
-    console.log(preferences["cardio"])
+    console.log(preferences["cardio"]);
+  }
+
+  recommend() {
+    recommendation = Recommendation();
+    console.log(recommendation);
+    this.props.navigation.navigate("RecommendationScreen");
   }
 
   render() {
@@ -334,6 +349,14 @@ export class HomeScreen extends React.Component {
         >
           <SettingsModal />
         </Modal>
+        <View style={{ width: deviceWidth, alignItems: "center" }}>
+          <Button
+            onPress={() => this.recommend()}
+            style={{ margin: 16, width: deviceWidth - 64 }}
+          >
+            Recommend me a workout!
+          </Button>
+        </View>
       </WaveBackground>
     );
   }
