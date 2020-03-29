@@ -144,5 +144,5 @@ function main() {
             }
         }
     }
-    document.getElementById("test").innerHTML = msg;
+    document.getElementById("rec_exercise").innerHTML = msg;
 }
