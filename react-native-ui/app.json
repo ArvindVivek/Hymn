@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Slacks",
-    "slug": "slacks-rn-ui",
+    "name": "Hymn",
+    "slug": "hymn-rn-ui",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "platforms": [

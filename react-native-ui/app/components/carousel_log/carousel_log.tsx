@@ -25,7 +25,6 @@ import Carousel from "react-native-sideswipe";
 import firebase from "firebase";
 import { Pagination } from "react-native-snap-carousel";
 import * as moment from "moment";
-
 import { user, username } from "../../screens/login_screen/login_screen";
 import { images } from "./images";
 
@@ -52,6 +51,9 @@ async function fetchUserData() {
     });
   userData = new Array<Object>();
   for (var i in fetchedData) {
+    if(isNaN(i.substring(0,1))) {
+      return;
+    }
     userData.push({
       date: i,
       type: fetchedData[i]["type_of_exercise"],
