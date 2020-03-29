@@ -53,7 +53,7 @@ function recChest() {
     if (intensity > 1) {
         ex += "For your intensity level, we'd also like to suggest trying " + lvl[0][intensity-2] + "<br>";
     }
-    return ex.link("https://www.google.com");
+    //return ex.link("https://www.google.com");
 }
 
 function recShoulder() {
