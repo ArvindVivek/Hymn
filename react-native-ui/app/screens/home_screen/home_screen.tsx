@@ -9,7 +9,8 @@ import {
   Icon,
   BottomNavigation,
   BottomNavigationTab,
-  Card
+  Card,
+  Button
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
@@ -23,6 +24,11 @@ let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
 export class HomeScreen extends React.Component {
+  goToChat = () => {
+    // 1.
+    this.props.navigation.navigate('ChatScreen', { name: username });
+  }
+
   render() {
     return (
       <WaveBackground colors={["#21c5f2", "#0058ab"]}>
@@ -37,6 +43,11 @@ export class HomeScreen extends React.Component {
           Recently logged:
         </Text>
         <CarouselLog />
+        <Button
+          onPress={() => this.goToChat()}
+        >
+          Chat
+        </Button>
       </WaveBackground>
     );
   }

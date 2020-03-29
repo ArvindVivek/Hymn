@@ -22,6 +22,7 @@ import * as firebase from 'firebase';
 import { HomeScreen } from "./app/screens/home_screen/home_screen";
 import { LoginScreen } from "./app/screens/login_screen/login_screen";
 import { LoadingCheck } from "./app/screens/loading_check/loading_check"
+import { ChatScreen } from "./app/screens/chat_screen/chat_screen"
 
 var theme = { ...lightTheme, ...appTheme };
 
@@ -105,6 +106,13 @@ export const StackNavigator = createStackNavigator({
   },
   HomeScreen: {
     screen: HomeScreen,
+    navigationOptions: {
+      headerShown: false,
+      gestureEnabled: false
+    }
+  },
+  ChatScreen: {
+    screen: ChatScreen,
     navigationOptions: {
       headerShown: false,
       gestureEnabled: false
