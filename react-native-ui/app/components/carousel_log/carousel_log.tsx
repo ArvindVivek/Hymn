@@ -51,15 +51,15 @@ async function fetchUserData() {
     });
   userData = new Array<Object>();
   for (var i in fetchedData) {
-    if(isNaN(i.substring(0,1))) {
-      return;
+    if (isNaN(i.substring(0, 1))) {
+    } else {
+      userData.push({
+        date: i,
+        type: fetchedData[i]["type_of_exercise"],
+        sets: fetchedData[i]["num_of_sets"],
+        reps: fetchedData[i]["num_of_reps"]
+      });
     }
-    userData.push({
-      date: i,
-      type: fetchedData[i]["type_of_exercise"],
-      sets: fetchedData[i]["num_of_sets"],
-      reps: fetchedData[i]["num_of_reps"]
-    });
   }
   userData = userData.reverse();
   console.log(userData);
