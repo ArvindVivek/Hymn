@@ -142,6 +142,8 @@ function readData() {
             }
         }
 
+        intensity = snapshot.val().total;
+
         console.log(muscles);
 
     });

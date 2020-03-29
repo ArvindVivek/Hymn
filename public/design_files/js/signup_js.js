@@ -54,12 +54,15 @@ function signup() {
     var exercise_five = document.getElementById("area_5").value;
     var intensity_five = document.getElementById("level_5").value;
 
+    var total_val = document.getElementById("total_select").value;
+
     database.ref('users/' + name + "/Preferences").set({
         first_area: {exercise_one, intensity_one},
         second_area: {exercise_two, intensity_two},
         third_area: {exercise_three, intensity_three},
         fourth_area: {exercise_four, intensity_four},
-        fifth_area: {exercise_five, intensity_five}
+        fifth_area: {exercise_five, intensity_five},
+        total: total_val 
     });
 }
 
