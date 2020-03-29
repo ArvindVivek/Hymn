@@ -33,6 +33,9 @@ export class HomeScreen extends React.Component {
         </View>
         <QuickLog />
         <View style={{height: deviceHeight/12}} />
+        <Text style={styles.subText}>
+          Recently logged:
+        </Text>
         <CarouselLog />
       </WaveBackground>
     );
@@ -64,5 +67,12 @@ const styles = StyleSheet.create({
   },
   contentText: {
     color: "black",
+  },
+  subText: {
+    fontFamily: "Metropolis-SemiBold",
+    fontSize: deviceHeight/40,
+    color: "white",
+    marginBottom: 12,
+    marginLeft: 50
   }
 });

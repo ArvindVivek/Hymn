@@ -12,7 +12,8 @@ import {
   Card,
   Input,
   Text,
-  Button
+  Button,
+  Select
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
@@ -31,8 +32,13 @@ function scrub(str: string) {
   return str;
 }
 
-async function logData(type: string, sets: string, reps: string) {
+async function logData(type, sets: string, reps: string) {
   var now = moment();
+  if(type["text"] == undefined || type["text"] == null) {
+    alert("please fill out all of the spaces");
+    return;
+  }
+  type = type["text"].toLowerCase();
   if (type == "" || sets == "" || reps == "") {
     alert("please fill out all of the spaces");
     return;
@@ -58,10 +64,22 @@ async function logData(type: string, sets: string, reps: string) {
 
 export class QuickLog extends React.Component {
   state = {
-    type: "",
+    type: -1,
     reps: "",
-    sets: ""
+    sets: "",
   };
+
+  options = [
+    {text: "Chest"},
+    {text: "Shoulder"},
+    {text: "Back"},
+    {text: "Triceps"},
+    {text: "Bicep"},
+    {text: "Quadriceps"},
+    {text: "Hamstring"},
+    {text: "Calves"},
+    {text: "Cardio"}
+  ]
 
   setType = type => {
     this.setState({ type: type });
@@ -94,10 +112,11 @@ export class QuickLog extends React.Component {
         <Text category="s1" style={styles.contentText}>
           Quickly log your workout:
         </Text>
-        <Input
-          placeholder="type"
-          value={this.state.type}
-          onChangeText={this.setType}
+        <Select
+          placeholder="type of exercise"
+          data={this.options}
+          onSelect={this.setType}
+          selectedOption={this.state.type}
         />
         <Input
           placeholder="# of sets"

@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   Text,
+  Image,
   TouchableOpacity
 } from "react-native";
 import { createAppContainer, SafeAreaView } from "react-navigation";
@@ -15,13 +16,15 @@ import {
   Icon,
   BottomNavigation,
   BottomNavigationTab,
-  Card
+  Card,
+  Text as TextUIK
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as colors } from "../../../custom-theme.json";
 import Carousel from "react-native-sideswipe";
 import firebase from "firebase";
 import { Pagination } from "react-native-snap-carousel";
+import * as moment from "moment";
 
 import { user, username } from "../../screens/login_screen/login_screen";
 import { images } from "./images";
@@ -60,6 +63,22 @@ async function fetchUserData() {
   console.log(userData);
 }
 
+function selectImage(item) {
+  return images[item["type"]];
+}
+
+function renderHeader(item) {
+  var header = () => (
+    <Image
+      style={styles.headerImage}
+      source={{
+        uri: selectImage(item)
+      }}
+    />
+  );
+  return header;
+}
+
 export class CarouselLog extends React.Component {
   state = {
     slider1ActiveSlide: 0
@@ -68,10 +87,6 @@ export class CarouselLog extends React.Component {
   async componentDidMount() {
     await fetchUserData();
     this.forceUpdate();
-  }
-
-  selectImage(item) {
-    return images[item["type"]];
   }
 
   renderItem({ item, index }) {
@@ -105,63 +120,68 @@ export class CarouselLog extends React.Component {
   render() {
     return (
       <View style={styles.trueContainer}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.handleBackPress()}>
-          <View style={styles.button}>
-            <Icon
-              name="arrow-ios-back-outline"
-              height={deviceWidth / 16}
-              width={deviceWidth / 16}
-              fill="white"
-            />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <TouchableOpacity onPress={() => this.handleBackPress()}>
+            <View style={styles.button}>
+              <Icon
+                name="arrow-ios-back-outline"
+                height={deviceWidth / 16}
+                width={deviceWidth / 16}
+                fill="white"
+              />
+            </View>
+          </TouchableOpacity>
 
-        <View style={styles.box}>
-          <Carousel
-            index={this.state.slider1ActiveSlide}
-            contentOffset={deviceWidth / 8 + deviceHeight / 16}
-            data={userData}
-            renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-              <Card style={styles.card}>
-                <Text>
-                  {item["date"] +
-                    "\n" +
-                    item["type"] +
-                    "\n" +
-                    "sets: " +
-                    item["sets"] +
-                    "\n" +
-                    "reps: " +
-                    item["reps"]}
-                </Text>
-              </Card>
-            )}
-            itemWidth={(2 * deviceWidth) / 3}
-            style={{
-              width: deviceWidth - 30,
-              maxHeight: deviceHeight / 2 - 15
-            }}
-            onIndexChange={index =>
-              this.setState(() => ({ currentIndex: index }))
-            }
-          />
-        </View>
-        <TouchableOpacity onPress={() => this.handleForwardPress()}>
-          <View style={styles.button}>
-            <Icon
-              name="arrow-ios-forward-outline"
-              height={deviceWidth / 16}
-              width={deviceWidth / 16}
-              fill="white"
+          <View style={styles.box}>
+            <Carousel
+              index={this.state.slider1ActiveSlide}
+              contentOffset={deviceWidth / 8 + deviceHeight / 16}
+              data={userData}
+              renderItem={({
+                itemIndex,
+                currentIndex,
+                item,
+                animatedValue
+              }) => (
+                <Card header={renderHeader(item)} style={styles.card}>
+                  <TextUIK appearance="hint">
+                    {moment(item["date"]).calendar()}
+                  </TextUIK>
+                  <TextUIK category="h2" style={styles.cardTitle}>
+                    {item["type"] +
+                      " exercise; " +
+                      item["sets"] +
+                      " sets, " +
+                      item["reps"] +
+                      " reps"}
+                  </TextUIK>
+                </Card>
+              )}
+              itemWidth={(2 * deviceWidth) / 3}
+              style={{
+                width: deviceWidth - 30,
+                maxHeight: deviceHeight / 2 - 15
+              }}
+              onIndexChange={index =>
+                this.setState(() => ({ currentIndex: index }))
+              }
             />
           </View>
-        </TouchableOpacity>
-      </View>
-      <Pagination 
-      activeDotIndex={this.state.slider1ActiveSlide}
-      dotsLength={userData.length}
-      />
+          <TouchableOpacity onPress={() => this.handleForwardPress()}>
+            <View style={styles.button}>
+              <Icon
+                name="arrow-ios-forward-outline"
+                height={deviceWidth / 16}
+                width={deviceWidth / 16}
+                fill="white"
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Pagination
+          activeDotIndex={this.state.slider1ActiveSlide}
+          dotsLength={userData.length}
+        />
       </View>
     ); //types of exercise: chest, shoulder, back, tricep, bicep, quadriceps, hamstring, calves
   }
@@ -170,7 +190,7 @@ export class CarouselLog extends React.Component {
 const styles = StyleSheet.create({
   trueContainer: {
     width: deviceWidth,
-    alignItems: "center",
+    alignItems: "center"
   },
   container: {
     width: deviceWidth,
@@ -210,12 +230,20 @@ const styles = StyleSheet.create({
   },
   card: {
     height: deviceHeight / 2,
-    width: (2 * deviceWidth) / 3
+    width: (2 * deviceWidth) / 3,
+    justifyContent: "center"
   },
   button: {
     height: deviceHeight / 2,
     width: deviceWidth / 6,
     alignItems: "center",
     justifyContent: "center"
+  },
+  headerImage: {
+    height: deviceHeight / 2 - deviceHeight / 8,
+    width: (2 * deviceWidth) / 3,
+  },
+  cardTitle: {
+    fontFamily: 'Metropolis-SemiBold'
   }
 });
