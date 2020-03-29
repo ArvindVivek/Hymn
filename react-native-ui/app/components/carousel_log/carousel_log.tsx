@@ -49,7 +49,7 @@ async function fetchUserData() {
       fetchedData = snapshot.val();
       console.log(fetchedData);
     });
-  userData = new Array<Object>();
+  userData = new Array();
   for (var i in fetchedData) {
     if (isNaN(i.substring(0, 1))) {
     } else {
