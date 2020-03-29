@@ -27,7 +27,13 @@ let username = "";
 export { user, username };
 
 export async function fetchUsername() {
-    username = await AsyncStorage.getItem("name");
+  username = await AsyncStorage.getItem("name");
+}
+
+function scrub(str: string) {
+  str = str.replace(/\./g, "");
+  console.log(str);
+  return str;
 }
 
 export class LoginScreen extends React.Component {
@@ -51,13 +57,33 @@ export class LoginScreen extends React.Component {
       return;
     }
 
-    let signupOutput = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(e => alert(e.message));
+    let signupOutput = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(e => alert(e.message));
     console.log(signupOutput);
-    if(signupOutput) {
-        username = email;
-        user = signupOutput;
-        this.props.navigation.navigate("HomeScreen");
+    if (signupOutput) {
+      username = email;
+      user = signupOutput;
+      this.props.navigation.navigate("HomeScreen");
     }
+
+    await firebase
+      .database()
+      .ref("users/" + scrub(username) + "")
+      .set({
+        preferences: {
+          chest: 1,
+          shoulder: 1,
+          back: 1,
+          triceps: 1,
+          bicep: 1,
+          quadriceps: 1,
+          hamstring: 1,
+          calves: 1,
+          cardio: 1
+        }
+      });
 
     await this.saveCookies();
   }
@@ -73,21 +99,24 @@ export class LoginScreen extends React.Component {
     }
     email = email.toLowerCase();
 
-    let loginOutput = await firebase.auth().signInWithEmailAndPassword(email, password).catch(e => alert(e.message));
+    let loginOutput = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(e => alert(e.message));
     console.log(loginOutput);
-    if(loginOutput) {
-        username = email;
-        user = loginOutput;
-        this.props.navigation.navigate("HomeScreen");
+    if (loginOutput) {
+      username = email;
+      user = loginOutput;
+      this.props.navigation.navigate("HomeScreen");
     }
 
     await this.saveCookies();
   }
 
   async saveCookies() {
-    if(this.state.checked == true) {
-        await AsyncStorage.setItem("credentials", JSON.stringify(user));
-        await AsyncStorage.setItem("name", username);
+    if (this.state.checked == true) {
+      await AsyncStorage.setItem("credentials", JSON.stringify(user));
+      await AsyncStorage.setItem("name", username);
     }
   }
 
