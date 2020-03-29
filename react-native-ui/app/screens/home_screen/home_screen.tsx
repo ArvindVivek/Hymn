@@ -17,7 +17,7 @@ import { WaveBackground } from "../../components/wave_background/wave_background
 import { QuickLog } from "../../components/quick_log/quick_log";
 
 import { user, username } from "../login_screen/login_screen";
-import { CarouselLog } from "../../components/carousel_log/carousel_log"
+import { CarouselLog, CarouselLogTest } from "../../components/carousel_log/carousel_log"
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
@@ -32,6 +32,7 @@ export class HomeScreen extends React.Component {
           </Text>
         </View>
         <QuickLog />
+        <View style={{height: deviceHeight/12}} />
         <CarouselLog />
       </WaveBackground>
     );
