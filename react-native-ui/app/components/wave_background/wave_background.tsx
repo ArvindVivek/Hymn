@@ -7,16 +7,21 @@ import waves from "./waves.flr";
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-export class WaveBackground extends React.Component {
+interface WaveBackgroundProps {
+    colors: Array<string>
+}
+
+export class WaveBackground extends React.Component<WaveBackgroundProps, {}> {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { colors } = this.props;
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={["#21c5f2", "#0058ab"]}
+          colors={colors}
           style={styles.background}
         >
           <FlareComponent
