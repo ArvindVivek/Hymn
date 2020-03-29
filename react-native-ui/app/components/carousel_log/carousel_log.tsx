@@ -58,7 +58,7 @@ async function fetchUserData() {
   await wait(500);
   userData = new Array();
   for (var i in fetchedData) {
-    if (isNaN(i.substring(0, 1))) {
+    if ("p" == i.substring(0, 1)) {
     } else {
       userData.push({
         date: i,
