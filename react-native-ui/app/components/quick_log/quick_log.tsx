@@ -32,6 +32,42 @@ function scrub(str: string) {
   return str;
 }
 
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
+let userData = [];
+export {userData};
+
+export async function fetchUserData() {
+  let fetchedData;
+  await firebase
+    .database()
+    .ref("/users/" + scrub(username))
+    .once("value")
+    .then(function(snapshot) {
+      fetchedData = snapshot.val();
+      console.log(fetchedData);
+    });
+  await wait(500);
+  userData = new Array();
+  for (var i in fetchedData) {
+    if ("p" == i.substring(0, 1)) {
+    } else {
+      userData.push({
+        date: i,
+        type: fetchedData[i]["type_of_exercise"],
+        sets: fetchedData[i]["num_of_sets"],
+        reps: fetchedData[i]["num_of_reps"]
+      });
+    }
+  }
+  userData = userData.reverse();
+  console.log(userData);
+}
+
 async function logData(type, sets: string, reps: string) {
   var now = moment();
   if(type["text"] == undefined || type["text"] == null) {
@@ -59,6 +95,7 @@ async function logData(type, sets: string, reps: string) {
       num_of_sets: sets,
       num_of_reps: reps
     });
+  await fetchUserData();
   return true;
 }
 

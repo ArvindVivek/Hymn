@@ -215,15 +215,15 @@ function needRest() {
 
 export function main() {
   muscles = [
-    ["Chest", 2, 1, recChest()],
-    ["Shoulders", 4, 1, recShoulder()],
-    ["Back", 2, 1, recBack()],
+    ["Chest", 0, 1, recChest()],
+    ["Shoulders", 0, 1, recShoulder()],
+    ["Back", 0, 1, recBack()],
     ["Triceps", 0, 1, recTriceps()],
-    ["Biceps", 2, 1, recBiceps()],
-    ["Quadriceps", 2, 1, recQuadriceps()],
-    ["Hamstrings", 2, 1, recHamstrings()],
-    ["Calf", 2, 1, recCalf()],
-    ["Cardio", 2, 1, recCardio()]
+    ["Biceps", 0, 1, recBiceps()],
+    ["Quadriceps", 0, 1, recQuadriceps()],
+    ["Hamstrings", 0, 1, recHamstrings()],
+    ["Calf", 0, 1, recCalf()],
+    ["Cardio", 0, 1, recCardio()]
   ];
   applyPreferences();
   var msg = "";

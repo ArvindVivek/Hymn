@@ -27,49 +27,17 @@ import { Pagination } from "react-native-snap-carousel";
 import * as moment from "moment";
 import { user, username } from "../../screens/login_screen/login_screen";
 import { images } from "./images";
+import {userData, fetchUserData} from "../quick_log/quick_log"
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-let userData = [];
+let userDataCache = userData;
 
 function scrub(str: string) {
   str = str.replace(/\./g, "");
   console.log(str);
   return str;
-}
-
-function wait(timeout) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
-
-async function fetchUserData() {
-  let fetchedData;
-  await firebase
-    .database()
-    .ref("/users/" + scrub(username))
-    .once("value")
-    .then(function(snapshot) {
-      fetchedData = snapshot.val();
-      console.log(fetchedData);
-    });
-  await wait(500);
-  userData = new Array();
-  for (var i in fetchedData) {
-    if ("p" == i.substring(0, 1)) {
-    } else {
-      userData.push({
-        date: i,
-        type: fetchedData[i]["type_of_exercise"],
-        sets: fetchedData[i]["num_of_sets"],
-        reps: fetchedData[i]["num_of_reps"]
-      });
-    }
-  }
-  userData = userData.reverse();
-  console.log(userData);
 }
 
 function selectLevel(item) {
@@ -112,7 +80,19 @@ export class CarouselLog extends React.Component {
 
   async componentDidMount() {
     await fetchUserData();
+    this.beginPolling();
     this.forceUpdate();
+  }
+
+  beginPolling() {
+    let _this = this;
+    userDataCache = userData;
+    setInterval(function() {
+      if(userDataCache != userData) {
+        _this.forceUpdate();
+        userDataCache = userData;
+      }
+    }, 1000);
   }
 
   renderItem({ item, index }) {
