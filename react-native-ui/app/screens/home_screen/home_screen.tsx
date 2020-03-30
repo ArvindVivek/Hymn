@@ -123,6 +123,11 @@ class SettingsModal extends React.Component {
     };
   }
 
+  handleLogOut() {
+    AsyncStorage.clear();
+    this.props.navigation.navigate("LoginScreen");
+  }
+
   render() {
     return (
       <Layout style={styles.modal}>
@@ -260,21 +265,13 @@ class SettingsModal extends React.Component {
             />
           </View>
           <View style={{ height: deviceHeight / 16 }} />
-          <Button onPress={() => handleLogOut()}>
+          <Button onPress={() => this.handleLogOut()}>
             Log Out
           </Button>
         </ScrollView>
       </Layout>
     );
   }
-}
-
-let inStatus = 0;
-export { inStatus };
-
-function handleLogOut() {
-  AsyncStorage.clear();
-  inStatus = 1;
 }
 
 function wait(timeout) {
