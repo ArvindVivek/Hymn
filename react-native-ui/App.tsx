@@ -75,7 +75,7 @@ export default class App extends React.Component {
 
   async UNSAFE_componentWillMount() {
     await this.loadFonts();
-    await wait(500);
+    await wait(2000);
     await this.forceUpdate();
   }
 

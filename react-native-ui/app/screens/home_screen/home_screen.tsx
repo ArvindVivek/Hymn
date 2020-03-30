@@ -325,7 +325,7 @@ export class HomeScreen extends React.Component {
           </Text>
         </View>
         <QuickLog />
-        <View style={{ height: deviceHeight / 12 }} />
+        <View style={{ height: deviceHeight / 18 }} />
         <Text style={styles.subText}>Recently logged:</Text>
         <CarouselLog />
         <FAB
