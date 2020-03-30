@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Text } from "react-native";
+import { StyleSheet, View, Dimensions, Text, AsyncStorage } from "react-native";
 import {
   createAppContainer,
   SafeAreaView,
@@ -260,10 +260,21 @@ class SettingsModal extends React.Component {
             />
           </View>
           <View style={{ height: deviceHeight / 16 }} />
+          <Button onPress={() => handleLogOut()}>
+            Log Out
+          </Button>
         </ScrollView>
       </Layout>
     );
   }
+}
+
+let inStatus = 0;
+export { inStatus };
+
+function handleLogOut() {
+  AsyncStorage.clear();
+  inStatus = 1;
 }
 
 function wait(timeout) {

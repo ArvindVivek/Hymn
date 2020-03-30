@@ -23,6 +23,7 @@ import { LoginScreen } from "./app/screens/login_screen/login_screen";
 import { LoadingCheck } from "./app/screens/loading_check/loading_check"
 import { ChatScreen } from "./app/screens/chat_screen/chat_screen";
 import { RecommendationScreen } from "./app/screens/recommendation_screen/recommendation_screen";
+import { inStatus } from "./app/screens/home_screen/home_screen"
 
 var theme = { ...lightTheme, ...appTheme };
 
@@ -44,6 +45,8 @@ function wait(timeout) {
     setTimeout(resolve, timeout);
   });
 }
+
+let inStatusCache = 0;
 
 export default class App extends React.Component {
   async loadFonts() {
@@ -73,10 +76,25 @@ export default class App extends React.Component {
     });
   }
 
+  beginPolling() {
+    let _this = this;
+    inStatusCache = inStatus;
+    setInterval(function() {
+      if(inStatusCache != inStatus) {
+        _this.forceUpdate();
+        inStatusCache = inStatus;
+      }
+    }, 1000);
+  }
+
   async UNSAFE_componentWillMount() {
     await this.loadFonts();
     await wait(2000);
     await this.forceUpdate();
+  }
+
+  componentDidMount() {
+    this.beginPolling();
   }
 
   render() {
