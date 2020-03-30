@@ -73,6 +73,12 @@ async function fetchPreferences() {
 }
 
 class SettingsModal extends React.Component {
+  _this;
+  
+  constructor(props) {
+    super(props);
+    this._this = props.thisT;
+  }
   state = {
     chest: null,
     shoulder: null,
@@ -125,7 +131,8 @@ class SettingsModal extends React.Component {
 
   handleLogOut() {
     AsyncStorage.clear();
-    this.props.navigation.navigate("LoginScreen");
+    this._this.props.navigation.navigate("LoginScreen");
+    this._this.setVisible();
   }
 
   render() {
@@ -353,7 +360,7 @@ export class HomeScreen extends React.Component {
           visible={this.state.isVisible}
           style={{ alignSelf: "center" }}
         >
-          <SettingsModal />
+          <SettingsModal thisT={this}/>
         </Modal>
         <View style={{ width: deviceWidth, alignItems: "center" }}>
           <Button
