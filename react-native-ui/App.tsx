@@ -39,6 +39,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
 
 export default class App extends React.Component {
   async loadFonts() {
@@ -70,6 +75,7 @@ export default class App extends React.Component {
 
   async UNSAFE_componentWillMount() {
     await this.loadFonts();
+    await wait(500);
     await this.forceUpdate();
   }
 
