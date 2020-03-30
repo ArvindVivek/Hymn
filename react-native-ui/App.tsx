@@ -79,10 +79,6 @@ export default class App extends React.Component {
     await this.forceUpdate();
   }
 
-  componentDidMount() {
-    this.beginPolling();
-  }
-
   render() {
     return (
       <React.Fragment>
